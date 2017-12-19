@@ -3,3 +3,31 @@ rick:
   name: Rick Sanchez
   email: rick@c-137.com
   password_digest: <%= User.digest('password') %>
+  admin: true
+
+morty:
+  name: Morty Smith
+  email: morty@c-137.com
+  password_digest: <%= User.digest('password') %>
+
+beth:
+  name: Beth Smith
+  email: beth@c-137.com
+  password_digest: <%= User.digest('password') %>
+
+summer:
+  name: Summer Smith
+  email: summer@c-137.com
+  password_digest: <%= User.digest('password') %>
+
+jerry:
+  name: Jerry Smith
+  email: jerry@c-137.com
+  password_digest: <%= User.digest('password') %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name:  <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= User.digest('password') %>
+<% end %>
