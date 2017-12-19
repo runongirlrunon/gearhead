@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+strat:
+  brand: Fender
+  model: Stratocaster
+  ssn: ABCD1234
+  cost: 1400
+  created_at: <%= 10.minutes.ago %>
+  user: rick
+
+sg:
+  brand: Gibson
+  model: SG
+  ssn: ABCD1234
+  cost: 1200
+  created_at: <%= 3.years.ago %>
+  user: rick
+
+bass:
+  brand: Fender
+  model: Jazz Bass
+  ssn: ABCD1234
+  cost: 1300
+  created_at: <%= Time.zone.now %>
+  user: morty
+
+<% 30.times do |n| %>
+item_<%= n %>:
+  brand: <%= Faker::Hipster.word.titlecase %>
+  model: <%= Faker::Music.instrument %>
+  ssn: <%= Faker::Number.number(8) %>
+  cost: <%= Faker::Commerce.price %>
+  created_at: <%= 42.days.ago %>
+  user: rick
+<% end %>

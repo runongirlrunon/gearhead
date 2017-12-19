@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
+  has_many :items, dependent: :destroy
 
   before_save { self.email = email.downcase }
 
@@ -43,5 +44,11 @@ class User < ApplicationRecord
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # Defines a proto-feed.
+  # See "Following users" for the full implementation.
+  def feed
+    Item.where("user_id = ?", id)
   end
 end

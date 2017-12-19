@@ -13,3 +13,15 @@ User.create!(name:  "Example User",
                password:              password,
                password_confirmation: password)
 end
+
+users = User.order(:created_at).take(6)
+50.times do
+  brand = Faker::Hipster.word.titlecase
+  instrument = Faker::Music.instrument
+  blah = Faker::Number.number(8)
+  price = Faker::Commerce.price
+  users.each { |user| user.items.create!(brand: brand,
+                                         model: instrument,
+                                         ssn: blah,
+                                         cost: price) }
+end
