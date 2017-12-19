@@ -10,6 +10,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @items = @user.items.paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReportPdf.new(@items)
+        send_data pdf.render, filename: 'gearhead_list.pdf', type: 'application/pdf'
+      end
+    end
   end
 
   def new

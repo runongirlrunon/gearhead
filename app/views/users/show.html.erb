@@ -7,6 +7,9 @@
         <%= @user.name %>
       </h1>
     </section>
+    <%= link_to "Something is missing!",
+                url_for(@user) + ".pdf",
+                data: { confirm: "This will download a PDF to your computer. Click OK to proceed." } %>
   </aside>
   <div class="col-md-8">
     <% if @user.items.any? %>
