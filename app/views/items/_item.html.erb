@@ -4,7 +4,7 @@
   <span class="item_info"><%= item.brand %> <%= item.model %></span>
   <span class="item_info">Serial number: <%= item.ssn %></span>
   <span class="item_info">Price: $<%= item.cost %></span>
-
+  <%= image_tag item.picture.url if item.picture? %>
   <span class="timestamp">
     Posted <%= time_ago_in_words(item.created_at) %> ago.
     <% if current_user?(item.user) %>
