@@ -4,7 +4,10 @@ class ItemsController < ApplicationController
 
   def index
     @items = if params[:search_term]
-      Item.where('brand LIKE ? OR model LIKE ?', "%#{params[:search_term]}", "%#{params[:search_term]}").paginate(page: params[:page])
+      if Rails.env.production?
+        Item.where('brand ILIKE ? OR model ILIKE ?', "%#{params[:search_term]}", "%#{params[:search_term]}").paginate(page: params[:page])
+      else
+        Item.where('brand LIKE ? OR model LIKE ?', "%#{params[:search_term]}", "%#{params[:search_term]}").paginate(page: params[:page])
     else
       Item.paginate(page: params[:page])
     end
