@@ -1,0 +1,28 @@
+<% provide(:title, "Edit item") %>
+<h1>Update your item</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :brand %>
+      <%= f.text_field :brand, class: 'form-control' %>
+
+      <%= f.label :model %>
+      <%= f.text_field :model, class: 'form-control' %>
+
+      <%= f.label :ssn %>
+      <%= f.text_field :ssn, class: 'form-control' %>
+
+      <%= f.label :cost, "Confirmation" %>
+      <%= f.text_field :cost, class: 'form-control' %>
+
+      <span class="picture">
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      </span>
+
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

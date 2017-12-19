@@ -11,5 +11,8 @@
       <%= link_to "delete", item, method: :delete,
                                   data: { confirm: "You sure?" } %>
     <% end %>
+    <% if !current_user?(item.user) %>
+      <%= mail_to item.user.email, "Contact owner" %>
+    <% end %>
   </span>
 </li>

@@ -1,0 +1,24 @@
+<% provide(:title, 'All items') %>
+<h1>All items</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="input-group col-md-12">
+      <%= form_tag(items_path, method: :get) do %>
+        <%= text_field_tag :search_term, params[:search_term] %>
+        <%= submit_tag 'Search' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= will_paginate %>
+
+<ul class="items">
+  <%= render @items %>
+  <% if @items.blank? %>
+  <h4>There are no items containing the term <%= params[:search_term] %>.</h4>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

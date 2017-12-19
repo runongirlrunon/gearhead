@@ -1,6 +1,14 @@
 class ItemsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :logged_in_user, only: [:index, :edit, :update, :create, :destroy]
+  before_action :correct_user,   only: [:edit, :update, :destroy]
+
+  def index
+    @items = if params[:search_term]
+      Item.where('brand LIKE ? OR model LIKE ?', "%#{params[:search_term]}", "%#{params[:search_term]}").paginate(page: params[:page])
+    else
+      Item.paginate(page: params[:page])
+    end
+  end
 
   def create
     @item = current_user.items.build(item_params)
@@ -13,6 +21,19 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update_attributes(item_params)
+      # handle update_attributes
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @item.destroy
     flash[:success] = "Item deleted from your library"
@@ -22,7 +43,7 @@ class ItemsController < ApplicationController
   private
 
     def item_params
-      params.require(:item).permit(:brand, :model, :ssn, :cost, :picture)
+      params.require(:item).permit(:brand, :model, :ssn, :cost, :picture, :search_term)
     end
 
     def correct_user
