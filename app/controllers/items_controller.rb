@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
         Item.where('brand ILIKE ? OR model ILIKE ?', "%#{params[:search_term]}", "%#{params[:search_term]}").paginate(page: params[:page])
       else
         Item.where('brand LIKE ? OR model LIKE ?', "%#{params[:search_term]}", "%#{params[:search_term]}").paginate(page: params[:page])
+      end
     else
       Item.paginate(page: params[:page])
     end
